@@ -1,14 +1,14 @@
 //绘制背景
-import { Resources } from './Resources.js';
+import { DataStore } from "./DataStore.js";
 
 export class Background{
 
   constructor(){
-    this.img = Resources["background"];
+    this.img = DataStore.getInstance().res.get("background");
   }
 
-  draw(ctx,canWidth,canHeight){
-    ctx.drawImage(this.img, 0, 0, canWidth, canHeight);
+  draw(canWidth,canHeight){
+    DataStore.getInstance().ctx.drawImage(this.img, 0, 0, canWidth, canHeight);
   }
 
 }
