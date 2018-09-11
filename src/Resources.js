@@ -1,4 +1,4 @@
-export const picources = [
+export const Resources = [
   ['babyEye0', 'pic/babyEye0.png'],
   ['babyEye1', 'pic/babyEye1.png'],
   ['babyFade0', 'pic/babyFade0.png'],
