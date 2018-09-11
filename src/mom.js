@@ -1,8 +1,8 @@
 export class MomObj{
 
   constructor(){
-    this.x = 0;
-    this.y = 0;
+    this.x = DataStore.getInstance().canvas.width * 0.5;
+    this.y = DataStore.getInstance().canvas.height * 0.5;
     this.angle = 0;
     this.momTailTimer = 0;
     this.momTailCount = 0;
@@ -10,11 +10,6 @@ export class MomObj{
     this.momEyeCount = 0;
     this.momEyeInterval = 1000;
     this.momBodyCount = 0;
-  }
-  
-  init() {
-    this.x = canWidth * 0.5;
-    this.y = canHeight * 0.5;
   }
 
   draw() {
@@ -45,7 +40,7 @@ export class MomObj{
       this.momEyeTimer %= this.momEyeInterval;
 
       if (this.momEyeCount == 0) {
-        this.momEyeInterval = Math.random() * 1500 + 2000 //[2000,3500)
+        this.momEyeInterval = Math.random() * 1500 + 2000; //[2000,3500)
       } else {
         this.momEyeInterval = 200;
       }
