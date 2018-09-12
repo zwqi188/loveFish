@@ -1,5 +1,6 @@
 import { ResourceLoader } from "./src/ResourceLoader.js";
 import { Background } from './src/background.js';
+import { AneObj } from './src/ane.js';
 import { Resources } from './src/Resources.js';
 import { DataStore } from './src/DataStore.js';
 
@@ -17,16 +18,27 @@ export class Main {
     this.dataStore.canvas = this.canvas;
     this.dataStore.ctx = this.ctx;
     this.dataStore.res = map;
+    this.dataStore.deltaTime = 0;
+    this.dataStore.lastTime = Date.now();
     this.dataStore.background = new Background();
-    this.init();
+    this.dataStore.ane = new AneObj();
+    this.dataStore.ane.init();
+    this.gameloop();
   }
 
-  init(){
+  gameloop(){
+   
     this.draw();
+    let timer = requestAnimationFrame(() => this.gameloop());
+   // window.requestAnimFrame(gameloop);
   }
 
   draw(){
-    this.dataStore.background.draw(this.canvas.width, this.canvas.height);
+    var now = Date.now();
+    this.dataStore.deltaTime = now - this.dataStore.lastTime;
+    this.dataStore.lastTime = now;
+    this.dataStore.background.draw();
+    this.dataStore.ane.draw();
   }
 
 }

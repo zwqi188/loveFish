@@ -8,7 +8,7 @@ export class Background{
   }
 
 
-  draw(canWidth,canHeight){
+  draw(){
     DataStore.getInstance().ctx.drawImage(this.img, 0, 0, DataStore.getInstance().canvas.width, DataStore.getInstance().canvas.height);
   }
 
