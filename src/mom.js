@@ -74,13 +74,14 @@ export class MomObj{
     var momTailCount = this.momTailCount;
     DataStore.getInstance().ctx.drawImage(this.momTail[this.momTailCount], -this.momTail[this.momTailCount].width * 0.5 + 30, -this.momTail[this.momTailCount].height * 0.5);
     var momBodyCount = this.momBodyCount;
-    // if (data.double == 1) {//ora
-    //   DataStore.getInstance().ctx.drawImage(this.momBodyOra[this.momBodyCount], -this.momBodyOra[this.momBodyCount].width * 0.5, -this.momBodyOra[this.momBodyCount].height * 0.5);
-    // } else {//blue
+    if (DataStore.getInstance().data.double == 1) {//ora
+      DataStore.getInstance().ctx.drawImage(this.momBodyOra[this.momBodyCount], -this.momBodyOra[this.momBodyCount].width * 0.5, -this.momBodyOra[this.momBodyCount].height * 0.5);
+     } else {//blue
       DataStore.getInstance().ctx.drawImage(this.momBodyBlue[this.momBodyCount], -this.momBodyOra[this.momBodyCount].width * 0.5, -this.momBodyOra[this.momBodyCount].height * 0.5);
-   // }
-   // var momEyeCount = this.momEyeCount;
-    //DataStore.getInstance().ctx.drawImage(this.momEye[this.momEyeCount], -this.momEye[this.momEyeCount].width * 0.5, -this.momEye[this.momEyeCount].height * 0.5);
+   }
+    var momEyeCount = this.momEyeCount;
+   // console.log("--"+this.momEye[this.momEyeCount]);
+    DataStore.getInstance().ctx.drawImage(this.momEye[this.momEyeCount], -this.momEye[this.momEyeCount].width * 0.5, -this.momEye[this.momEyeCount].height * 0.5);
     DataStore.getInstance().ctx.restore();
   }
 }

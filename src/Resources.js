@@ -56,6 +56,8 @@ export const Resources = [
   ['bigTail5', 'pic/bigTail5.png'],
   ['bigTail6', 'pic/bigTail6.png'],
   ['bigTail7', 'pic/bigTail7.png'],
+  ['bigEye0', 'pic/bigEye0.png'],
+  ['bigEye1', 'pic/bigEye1.png'],
   ['blue', 'pic/blue.png'],
   ['dust0', 'pic/dust0.png'],
   ['dust1', 'pic/dust1.png'],

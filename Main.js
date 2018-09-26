@@ -4,6 +4,7 @@ import { AneObj } from './src/ane.js';
 import { Resources } from './src/Resources.js';
 import { DataStore } from './src/DataStore.js';
 import { MomObj } from './src/mom.js';
+import { DataObj } from './src/data.js';
 
 export class Main {
 
@@ -26,9 +27,11 @@ export class Main {
     this.dataStore.background = new Background();
     this.dataStore.ane = new AneObj();
     this.dataStore.mom = new MomObj();
+    this.dataStore.data = new DataObj();
     this.dataStore.ane.init();
     this.dataStore.mom.init();
     this.gameloop();
+    this.registerEvent();
   }
 
   gameloop(){
@@ -45,6 +48,17 @@ export class Main {
     this.dataStore.background.draw();
     this.dataStore.ane.draw();
     this.dataStore.mom.draw();
+  }
+
+  registerEvent() {
+    wx.onTouchMove(function (e) {
+      if (!DataStore.getInstance().data.gameOver) {
+        if (e.touches[0].clientX) {
+          DataStore.getInstance().mx = e.touches[0].clientX;
+          DataStore.getInstance().my = e.touches[0].clientY;
+     }
+    }
+  });
   }
 
 }
