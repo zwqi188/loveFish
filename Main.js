@@ -5,6 +5,9 @@ import { Resources } from './src/Resources.js';
 import { DataStore } from './src/DataStore.js';
 import { MomObj } from './src/mom.js';
 import { DataObj } from './src/data.js';
+import { BabyObj } from './src/baby.js';
+import { FruitObj } from './src/fruit.js';
+import { DustObj } from './src/dust.js';
 
 export class Main {
 
@@ -27,9 +30,15 @@ export class Main {
     this.dataStore.background = new Background();
     this.dataStore.ane = new AneObj();
     this.dataStore.mom = new MomObj();
+    this.dataStore.baby = new BabyObj();
     this.dataStore.data = new DataObj();
+    this.dataStore.fruit = new FruitObj();
+    this.dataStore.dust = new DustObj();
     this.dataStore.ane.init();
     this.dataStore.mom.init();
+    this.dataStore.baby.init();
+    this.dataStore.fruit.init();
+    this.dataStore.dust.init();
     this.gameloop();
     this.registerEvent();
   }
@@ -38,7 +47,6 @@ export class Main {
    
     this.draw();
     let timer = requestAnimationFrame(() => this.gameloop());
-   // window.requestAnimFrame(gameloop);
   }
 
   draw(){
@@ -48,6 +56,10 @@ export class Main {
     this.dataStore.background.draw();
     this.dataStore.ane.draw();
     this.dataStore.mom.draw();
+    this.dataStore.baby.draw();
+    this.dataStore.fruit.draw();
+    this.dataStore.fruit.fruitMonitor();
+    this.dataStore.dust.draw();
   }
 
   registerEvent() {

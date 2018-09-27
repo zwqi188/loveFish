@@ -18,73 +18,86 @@ export class BabyObj{
     this.babyBodyTimer = 0;
     this.babyBodyCount = 0;
     this.babyBodyInterval = 1000;
+
+    this.babyTail = [];
+    this.babyBody = [];
+    this.babyEye = [];
   }
+
   init() {
-    this.x = canWidth * 0.5 - 50;
-    this.y = canHeight * 0.5 + 50;
+    //分配图片资源到自己的类当中
+    for (let i = 0; i < 2; i++) {
+      this.babyEye.push(DataStore.getInstance().res.get("babyEye" + i));
+    }
+    for (let i = 0; i < 8; i++) {
+      this.babyTail.push(DataStore.getInstance().res.get("babyTail" + i));
+    }
+    for (let i = 0; i < 20; i++) {
+      this.babyBody.push(DataStore.getInstance().res.get("babyFade" + i));
+    }
+    this.x = DataStore.getInstance().canvas.width * 0.5 - 50;
+    this.y = DataStore.getInstance().canvas.height * 0.5 + 50;
     this.angle = 0;
   }
 
   draw() {
     //lerp x,y
-    this.x = CommonFunction.lerpDistance(mom.x, this.x, 0.98);
-    this.y = CommonFunction.lerpDistance(mom.y, this.y, 0.98);
+    this.x = CommonFunction.lerpDistance(DataStore.getInstance().mom.x, this.x, 0.98);
+    this.y = CommonFunction.lerpDistance(DataStore.getInstance().mom.y, this.y, 0.98);
 
     //lerp angle
-    var deltaY = mom.y - this.y;
-    var deltaX = mom.x - this.x;
+    var deltaY = DataStore.getInstance().mom.y - this.y;
+    var deltaX = DataStore.getInstance().mom.x - this.x;
     var beta = Math.atan2(deltaY, deltaX) + Math.PI;
 
     //lerp angle
     this.angle = CommonFunction.lerpAngle(beta, this.angle, 0.6);
-
     //baby tail count
-    this.babyTailTimer += deltaTime;
+    this.babyTailTimer += DataStore.getInstance().deltaTime;
     if (this.babyTailTimer > 50) {
       this.babyTailCount = (this.babyTailCount + 1) % 8;
       this.babyTailTimer %= 50;
     }
 
     //bybe eye
-    this.babyEyeTimer += deltaTime;
+    this.babyEyeTimer += DataStore.getInstance().deltaTime;
     if (this.babyEyeTimer > this.babyEyeInterval) {
       this.babyEyeCount = (this.babyEyeCount + 1) % 2;
       this.babyEyeTimer %= this.babyEyeInterval;
 
       if (this.babyEyeCount == 0) {
-        this.babyEyeInterval = Math.random() * 1500 + 2000 //[2000,3500)
+        this.babyEyeInterval = Math.random() * 1500 + 2000; //[2000,3500)
       } else {
         this.babyEyeInterval = 200;
       }
     }
 
     //baby body
-    this.babyBodyTimer += deltaTime * 1.5;
+    this.babyBodyTimer += DataStore.getInstance().deltaTime * 1.5;
     if (this.babyBodyTimer > 300) {
       this.babyBodyCount = this.babyBodyCount + 1;
       this.babyBodyTimer %= 300;
       if (this.babyBodyCount > 19) {
         this.babyBodyCount = 19;
         //game over
-        data.gameOver = true;
+        //DataStore.getInstance().data.gameOver = true;
       }
     }
 
     //ctx1
-    ctx1.save();
+    DataStore.getInstance().ctx.save();
     //translate()将原点转移到小鱼的坐标
-    ctx1.translate(this.x, this.y);
-    ctx1.rotate(this.angle);
+    DataStore.getInstance().ctx.translate(this.x, this.y);
+    DataStore.getInstance().ctx.rotate(this.angle);
 
     //print
     var babyTailCount = this.babyTailCount;
-    ctx1.drawImage(babyTail[babyTailCount], -babyTail[babyTailCount].width * 0.5 + 23, -babyTail[babyTailCount].height * 0.5);
+    DataStore.getInstance().ctx.drawImage(this.babyTail[babyTailCount], -this.babyTail[babyTailCount].width * 0.5 + 23, -this.babyTail[babyTailCount].height * 0.5);
     var babyBodyCount = this.babyBodyCount;
-    ctx1.drawImage(babyBody[babyBodyCount], -babyBody[babyBodyCount].width * 0.5, -babyBody[babyBodyCount].height * 0.5);
+    DataStore.getInstance().ctx.drawImage(this.babyBody[babyBodyCount], -this.babyBody[babyBodyCount].width * 0.5, -this.babyBody[babyBodyCount].height * 0.5);
     var babyEyeCount = this.babyEyeCount;
-    ctx1.drawImage(babyEye[babyEyeCount], -babyEye[babyEyeCount].width * 0.5, -babyEye[babyEyeCount].height * 0.5);
-
-    ctx1.restore();
+    DataStore.getInstance().ctx.drawImage(this.babyEye[babyEyeCount], -this.babyEye[babyEyeCount].width * 0.5, -this.babyEye[babyEyeCount].height * 0.5);
+    DataStore.getInstance().ctx.restore();
   }
 }
 
