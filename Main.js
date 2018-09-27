@@ -8,6 +8,9 @@ import { DataObj } from './src/data.js';
 import { BabyObj } from './src/baby.js';
 import { FruitObj } from './src/fruit.js';
 import { DustObj } from './src/dust.js';
+import { WaveObj } from './src/wave.js';
+import { HaloObj } from './src/halo.js';
+import { CommonFunction } from './src/commonFunctions.js';
 
 export class Main {
 
@@ -34,11 +37,15 @@ export class Main {
     this.dataStore.data = new DataObj();
     this.dataStore.fruit = new FruitObj();
     this.dataStore.dust = new DustObj();
+    this.dataStore.wave = new WaveObj();
+    this.dataStore.halo = new HaloObj();
     this.dataStore.ane.init();
     this.dataStore.mom.init();
     this.dataStore.baby.init();
     this.dataStore.fruit.init();
     this.dataStore.dust.init();
+    this.dataStore.wave.init();
+    this.dataStore.halo.init();
     this.gameloop();
     this.registerEvent();
   }
@@ -47,6 +54,8 @@ export class Main {
    
     this.draw();
     let timer = requestAnimationFrame(() => this.gameloop());
+    CommonFunction.momFruitsCollision();
+    CommonFunction.momBabyCollision();
   }
 
   draw(){
@@ -60,6 +69,8 @@ export class Main {
     this.dataStore.fruit.draw();
     this.dataStore.fruit.fruitMonitor();
     this.dataStore.dust.draw();
+    this.dataStore.halo.draw();
+    this.dataStore.wave.draw();
   }
 
   registerEvent() {

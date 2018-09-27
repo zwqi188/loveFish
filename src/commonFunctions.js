@@ -1,3 +1,5 @@
+import { DataStore } from "./DataStore.js";
+
 export class CommonFunction{
   constructor(){
   }
@@ -106,4 +108,45 @@ export class CommonFunction{
     var a = Math.random() * (n - m) + m;
     return Math.floor(a);
   }
+
+  //判断果实和大鱼的距离
+  static momFruitsCollision() {
+    if (!DataStore.getInstance().data.gameOver) {
+      for (var i = 0; i < DataStore.getInstance().fruit.num; i++) {
+        if (DataStore.getInstance().fruit.alive[i]) {
+        //calculate length
+          var l = CommonFunction.calLength2(DataStore.getInstance().fruit.x[i], DataStore.getInstance().fruit.y[i], DataStore.getInstance().mom.x, DataStore.getInstance().mom.y);
+        if (l < 900) {
+          //fruit eaten
+          DataStore.getInstance().fruit.dead(i);
+          DataStore.getInstance().data.fruitNum++;
+          DataStore.getInstance().mom.momBodyCount++;
+          if (DataStore.getInstance().mom.momBodyCount > 7) {
+            DataStore.getInstance().mom.momBodyCount = 7;
+          }
+          if (DataStore.getInstance().fruit.fruitType[i] == "blue") {//blue
+            DataStore.getInstance().data.double = 2;
+          }
+          DataStore.getInstance().wave.born(DataStore.getInstance().fruit.x[i], DataStore.getInstance().fruit.y[i]);
+        }
+      }
+    }
+  }
+}
+//mom baby collision
+  static momBabyCollision() {
+    if (DataStore.getInstance().data.fruitNum > 0 && !DataStore.getInstance().data.gameOver) {
+      var l = CommonFunction.calLength2(DataStore.getInstance().mom.x, DataStore.getInstance().mom.y, DataStore.getInstance().baby.x, DataStore.getInstance().baby.y);
+    if (l < 900) {
+      //baby recover
+      DataStore.getInstance().baby.babyBodyCount = 0;
+      //data => 0
+      DataStore.getInstance().mom.momBodyCount = 0;
+      //score update
+      DataStore.getInstance().data.addScore();
+      //draw halo
+      DataStore.getInstance().halo.born(DataStore.getInstance().baby.x, DataStore.getInstance().baby.y);
+    }
+  }
+ }
 }
