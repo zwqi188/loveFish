@@ -1,4 +1,5 @@
 //绘制背景
+//绘制背景
 import { DataStore } from "./DataStore.js";
 
 export class Background{

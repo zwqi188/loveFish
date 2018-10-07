@@ -11,6 +11,7 @@ import { DustObj } from './src/dust.js';
 import { WaveObj } from './src/wave.js';
 import { HaloObj } from './src/halo.js';
 import { CommonFunction } from './src/commonFunctions.js';
+import { StartButton } from './src/startButton.js';
 
 export class Main {
 
@@ -39,6 +40,7 @@ export class Main {
     this.dataStore.dust = new DustObj();
     this.dataStore.wave = new WaveObj();
     this.dataStore.halo = new HaloObj();
+    this.dataStore.startButton = new StartButton();
     this.dataStore.ane.init();
     this.dataStore.mom.init();
     this.dataStore.baby.init();
@@ -46,6 +48,7 @@ export class Main {
     this.dataStore.dust.init();
     this.dataStore.wave.init();
     this.dataStore.halo.init();
+    this.dataStore.startButton.init();
     this.gameloop();
     this.registerEvent();
   }
@@ -67,10 +70,16 @@ export class Main {
     this.dataStore.mom.draw();
     this.dataStore.baby.draw();
     this.dataStore.fruit.draw();
-    this.dataStore.fruit.fruitMonitor();
-    this.dataStore.dust.draw();
-    this.dataStore.halo.draw();
-    this.dataStore.wave.draw();
+    if (!DataStore.getInstance().data.gameOver) {
+      this.dataStore.fruit.fruitMonitor();
+      this.dataStore.dust.draw();
+      this.dataStore.halo.draw();
+      this.dataStore.wave.draw();
+      
+    }
+    if (DataStore.getInstance().data.gameOver){
+      this.dataStore.startButton.draw();
+    }
   }
 
   registerEvent() {

@@ -80,7 +80,7 @@ export class BabyObj{
       if (this.babyBodyCount > 19) {
         this.babyBodyCount = 19;
         //game over
-        //DataStore.getInstance().data.gameOver = true;
+        DataStore.getInstance().data.gameOver = true;
       }
     }
 
