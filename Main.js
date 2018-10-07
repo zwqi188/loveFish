@@ -70,9 +70,9 @@ export class Main {
     this.dataStore.mom.draw();
     this.dataStore.baby.draw();
     this.dataStore.fruit.draw();
+    this.dataStore.dust.draw();
     if (!DataStore.getInstance().data.gameOver) {
       this.dataStore.fruit.fruitMonitor();
-      this.dataStore.dust.draw();
       this.dataStore.halo.draw();
       this.dataStore.wave.draw();
       
@@ -91,6 +91,23 @@ export class Main {
      }
     }
   });
+
+    wx.onTouchStart(function (e) {
+      if (DataStore.getInstance().data.gameOver) {
+//         console.log("e.touches[0].clientX" + e.touches[0].clientX);
+//         console.log("e.touches[0].clientY" + e.touches[0].clientY);
+//         console.log("X" + (DataStore.getInstance().canvas.width / 2 - DataStore.getInstance().startButton.img.width / 4) + "+" + (DataStore.getInstance().canvas.width / 2 + DataStore.getInstance().startButton.img.width / 2));
+//         console.log("Y" + (DataStore.getInstance().canvas.height / 2 - DataStore.getInstance().startButton.img.height / 4)
+// + "+" + (DataStore.getInstance().canvas.height / 2 + DataStore.getInstance().startButton.img.height / 2));
+        if (e.touches[0].clientX > DataStore.getInstance().canvas.width / 2 - DataStore.getInstance().startButton.img.width / 4 && 
+          e.touches[0].clientX < DataStore.getInstance().canvas.width / 2 + DataStore.getInstance().startButton.img.width / 2 && 
+          e.touches[0].clientY > DataStore.getInstance().canvas.height / 2 - DataStore.getInstance().startButton.img.height / 4 && 
+          e.touches[0].clientY < DataStore.getInstance().canvas.height / 2 + DataStore.getInstance().startButton.img.height / 2){
+          DataStore.getInstance().data.gameOver = false;
+          DataStore.getInstance().baby.babyBodyCount = 0;
+        }
+      }
+    });
   }
 
 }
