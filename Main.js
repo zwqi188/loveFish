@@ -10,7 +10,7 @@ import { FruitObj } from './src/fruit.js';
 import { DustObj } from './src/dust.js';
 import { WaveObj } from './src/wave.js';
 import { HaloObj } from './src/halo.js';
-import { CommonFunction } from './src/commonFunctions.js';
+import { Common } from './src/common.js';
 import { StartButton } from './src/startButton.js';
 
 export class Main {
@@ -57,8 +57,8 @@ export class Main {
    
     this.draw();
     let timer = requestAnimationFrame(() => this.gameloop());
-    CommonFunction.momFruitsCollision();
-    CommonFunction.momBabyCollision();
+    Common.momFruitsCollision();
+    Common.momBabyCollision();
   }
 
   draw(){

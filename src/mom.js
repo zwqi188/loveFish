@@ -1,4 +1,4 @@
-import { CommonFunction } from './commonFunctions.js';
+import { Common } from './common.js';
 import { DataStore } from "./DataStore.js";
 
 export class MomObj{
@@ -35,15 +35,15 @@ export class MomObj{
 
   draw() {
     //lerp x,y 使一个值趋向于一个目标值，使大鱼跟随鼠标移动
-    this.x = CommonFunction.lerpDistance(DataStore.getInstance().mx, this.x, 0.98);
-    this.y = CommonFunction.lerpDistance(DataStore.getInstance().my, this.y, 0.98);
+    this.x = Common.lerpDistance(DataStore.getInstance().mx, this.x, 0.98);
+    this.y = Common.lerpDistance(DataStore.getInstance().my, this.y, 0.98);
 
     //delta angle 调整大鱼角度 使大鱼跟随鼠标移动
     var deltaY = DataStore.getInstance().my - this.y;
     var deltaX = DataStore.getInstance().mx - this.x;
     var beta = Math.atan2(deltaY, deltaX) + Math.PI;//atan2(y,x) 范围(-pi,pi)
     //lerp angle
-    this.angle = CommonFunction.lerpAngle(beta, this.angle, 0.6);
+    this.angle = Common.lerpAngle(beta, this.angle, 0.6);
 
     //tail
     //mom tail count

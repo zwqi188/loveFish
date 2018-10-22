@@ -1,5 +1,5 @@
 import { DataStore } from "./DataStore.js";
-import { CommonFunction } from './commonFunctions.js';
+import { Common } from './common.js';
 
 export class BabyObj{
 
@@ -42,8 +42,8 @@ export class BabyObj{
 
   draw() {
     //lerp x,y
-    this.x = CommonFunction.lerpDistance(DataStore.getInstance().mom.x, this.x, 0.98);
-    this.y = CommonFunction.lerpDistance(DataStore.getInstance().mom.y, this.y, 0.98);
+    this.x = Common.lerpDistance(DataStore.getInstance().mom.x, this.x, 0.98);
+    this.y = Common.lerpDistance(DataStore.getInstance().mom.y, this.y, 0.98);
 
     //lerp angle
     var deltaY = DataStore.getInstance().mom.y - this.y;
@@ -51,7 +51,7 @@ export class BabyObj{
     var beta = Math.atan2(deltaY, deltaX) + Math.PI;
 
     //lerp angle
-    this.angle = CommonFunction.lerpAngle(beta, this.angle, 0.6);
+    this.angle = Common.lerpAngle(beta, this.angle, 0.6);
     //baby tail count
     this.babyTailTimer += DataStore.getInstance().deltaTime;
     if (this.babyTailTimer > 50) {

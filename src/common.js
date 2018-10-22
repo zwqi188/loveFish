@@ -1,6 +1,6 @@
 import { DataStore } from "./DataStore.js";
 
-export class CommonFunction{
+export class Common{
   constructor(){
   }
 
@@ -115,7 +115,7 @@ export class CommonFunction{
       for (var i = 0; i < DataStore.getInstance().fruit.num; i++) {
         if (DataStore.getInstance().fruit.alive[i]) {
         //calculate length
-          var l = CommonFunction.calLength2(DataStore.getInstance().fruit.x[i], DataStore.getInstance().fruit.y[i], DataStore.getInstance().mom.x, DataStore.getInstance().mom.y);
+          var l = Common.calLength2(DataStore.getInstance().fruit.x[i], DataStore.getInstance().fruit.y[i], DataStore.getInstance().mom.x, DataStore.getInstance().mom.y);
         if (l < 900) {
           //fruit eaten
           DataStore.getInstance().fruit.dead(i);
@@ -136,7 +136,7 @@ export class CommonFunction{
 //mom baby collision
   static momBabyCollision() {
     if (DataStore.getInstance().data.fruitNum > 0 && !DataStore.getInstance().data.gameOver) {
-      var l = CommonFunction.calLength2(DataStore.getInstance().mom.x, DataStore.getInstance().mom.y, DataStore.getInstance().baby.x, DataStore.getInstance().baby.y);
+      var l = Common.calLength2(DataStore.getInstance().mom.x, DataStore.getInstance().mom.y, DataStore.getInstance().baby.x, DataStore.getInstance().baby.y);
     if (l < 900) {
       //baby recover
       DataStore.getInstance().baby.babyBodyCount = 0;
