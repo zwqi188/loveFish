@@ -1,6 +1,7 @@
 package com.dreamworks.lovefish.netty;
 
 import com.dreamworks.lovefish.constant.NettyConstant;
+import com.dreamworks.lovefish.utils.ObjectCodec;
 import io.netty.channel.*;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;

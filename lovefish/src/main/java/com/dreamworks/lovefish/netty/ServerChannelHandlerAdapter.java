@@ -1,4 +1,5 @@
 package com.dreamworks.lovefish.netty;
+import com.dreamworks.lovefish.entity.MethodInvokeMeta;
 import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
