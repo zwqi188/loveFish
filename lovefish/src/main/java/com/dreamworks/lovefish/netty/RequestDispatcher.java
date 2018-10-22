@@ -1,6 +1,7 @@
 package com.dreamworks.lovefish.netty;
 
-import com.dreamworks.lovefish.constant.NettyConstant;
+import com.dreamworks.lovefish.entity.MethodInvokeMeta;
+import com.dreamworks.lovefish.entity.NullWritable;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -13,55 +14,52 @@ import java.lang.reflect.Method;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+
+
 /**
  * Created by mac on 2018/10/22.
  */
 @Component
 public class RequestDispatcher implements ApplicationContextAware{
 
-    private ExecutorService executorService = Executors.newFixedThreadPool(NettyConstant.getMaxThreads());
+    /**
+     * Spring上下文
+     */
     private ApplicationContext app;
+
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        this.app = applicationContext;
+    }
 
     /**
      * 发送
      *
-     * @param ctx
-     * @param invokeMeta
+     * @param channelHandlerContext channelHandlerContext
+     * @param invokeMeta            invokeMeta
      */
-    public void dispatcher(final ChannelHandlerContext ctx, final MethodInvokeMeta invokeMeta) {
-        executorService.submit(() -> {
-            ChannelFuture f = null;
-            try {
-                Class<?> interfaceClass = invokeMeta.getInterfaceClass();
-                String name = invokeMeta.getMethodName();
-                Object[] args = invokeMeta.getArgs();
-                Class<?>[] parameterTypes = invokeMeta.getParameterTypes();
-                Object targetObject = app.getBean(interfaceClass);
-                Method method = targetObject.getClass().getMethod(name, parameterTypes);
-                Object obj = method.invoke(targetObject, args);
-                if (obj == null) {
-                    f = ctx.writeAndFlush(NullWritable.nullWritable());
-                } else {
-                    f = ctx.writeAndFlush(obj);
-                }
-                f.addListener(ChannelFutureListener.CLOSE);
-            } catch (Exception e) {
-                ResponseResult error = ResponseResultUtil.error(ResponseCodeEnum.SERVER_ERROR);
-                f = ctx.writeAndFlush(error);
-            } finally {
+    public void dispatcher(final ChannelHandlerContext channelHandlerContext, final MethodInvokeMeta invokeMeta) {
+        ChannelFuture f = null;
+        try {
+            Class<?> interfaceClass = invokeMeta.getInterfaceClass();
+            String name = invokeMeta.getMethodName();
+            Object[] args = invokeMeta.getArgs();
+            Class<?>[] parameterTypes = invokeMeta.getParameterTypes();
+            Object targetObject = app.getBean(interfaceClass);
+            Method method = targetObject.getClass().getMethod(name, parameterTypes);
+            Object obj = method.invoke(targetObject, args);
+            if (obj == null) {
+                f = channelHandlerContext.writeAndFlush(NullWritable.nullWritable());
+            } else {
+                f = channelHandlerContext.writeAndFlush(obj);
+            }
+            f.addListener(ChannelFutureListener.CLOSE);
+        } catch (Exception e) {
+            f = channelHandlerContext.writeAndFlush(e.getMessage());
+        } finally {
+            if (f != null) {
                 f.addListener(ChannelFutureListener.CLOSE);
             }
-        });
+        }
     }
-
-    /**
-     * 加载当前application.xml
-     *
-     * @param ctx
-     * @throws BeansException
-     */
-    public void setApplicationContext(ApplicationContext ctx) throws BeansException {
-        this.app = ctx;
-    }
-
 }
