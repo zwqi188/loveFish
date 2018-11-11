@@ -68,4 +68,6 @@ export const Resources = [
   ['dust6', 'pic/dust6.png'],
   ['fruit', 'pic/fruit.png'],
   ['startButton','pic/startButton.png'],
+  ['controller0','pic/controller0.png'],
+  ['controller1','pic/controller1.png']
 ];
