@@ -21,16 +21,16 @@ export class Controller{
    */
   draw() {
     for (var i = 0 ; i < this.img.length; i++) {
-      var locationX = DataStore.getInstance().canvas.width / 2 - (this.img[1].width / 4) / 2;
-      var locationY = DataStore.getInstance().canvas.height - this.img[1].height / 2;
+      var locationX = DataStore.getInstance().canvas.width / 2 - (this.img[0].width / 4) / 2;
+      var locationY = DataStore.getInstance().canvas.height - this.img[0].height / 4 - 20;
       if(i == 0) //大虚拟按键
       {
-        DataStore.getInstance().ctx.drawImage(this.img[i], locationX, locationY,
-          this.img[i].width / 4, this.img[i].height / 4);
+        DataStore.getInstance().ctx.drawImage(this.img[0], locationX, locationY,
+          this.img[0].width / 4, this.img[0].height / 4);
       }
-      if(i == 1){
-        DataStore.getInstance().ctx.drawImage(this.img[i], locationX, locationY,
-          this.img[i].width / 4, this.img[i].height / 4);
+      if(i == 1){ //小虚拟按键
+        DataStore.getInstance().ctx.drawImage(this.img[1], locationX + this.img[0].width / 4 / 2 - this.img[1].width / 4 / 2, locationY + this.img[0].height / 4 / 2 - this.img[1].height / 4 / 2,
+          this.img[1].width / 4, this.img[1].height / 4);
       }
      
     } 
