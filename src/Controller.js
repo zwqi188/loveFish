@@ -33,8 +33,8 @@ export class Controller{
       this.img.push(DataStore.getInstance().res.get("controller" + i));
     }
     
-    this.manager = nipplejs.create(this.options);
-    this.on();
+    // this.manager = nipplejs.create(this.options);
+    // this.on();
   }
 
   /**
