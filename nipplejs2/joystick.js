@@ -1,16 +1,27 @@
 function Joystick(opt) {
-  if (!opt.zone) return;
-  var disabledColor = opt && opt.disabledColor || true;
-
+  
+  // if (!opt.zone) return;
+  // var disabledColor = opt && opt.disabledColor || true;
+  // console.log("opt"+opt.zone);
+  // this.options = {
+  //   mode: opt && opt.mode || 'static',
+  //   size: opt && opt.size || 300,
+  //   color: disabledColor ? 'ddd' : (opt && opt.color || '#eee'),
+  //   position: opt && opt.position || {
+  //     left: '50%',
+  //     top: '50%'
+  //   },
+  //  zone: opt && opt.zone
+  // };
   this.options = {
-    mode: opt && opt.mode || 'static',
-    size: opt && opt.size || 300,
-    color: disabledColor ? 'ddd' : (opt && opt.color || '#eee'),
-    position: opt && opt.position || {
+    mode: 'static',
+    size:  300,
+    color: '#eee',
+    position: {
       left: '50%',
       top: '50%'
     },
-    zone: opt && opt.zone
+   //zone: opt && opt.zone
   };
 
   this.distance = 0;
