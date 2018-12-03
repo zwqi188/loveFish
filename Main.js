@@ -1,17 +1,17 @@
 import { ResourceLoader } from "./src/ResourceLoader.js";
-import { Background } from './src/Background.js';
-import { AneObj } from './src/Ane.js';
+import { Background } from './src/background.js';
+import { AneObj } from './src/ane.js';
 import { Resources } from './src/Resources.js';
 import { DataStore } from './src/DataStore.js';
-import { MomObj } from './src/Mom.js';
-import { DataObj } from './src/Data.js';
-import { BabyObj } from './src/Baby.js';
-import { FruitObj } from './src/Fruit.js';
-import { DustObj } from './src/Dust.js';
-import { WaveObj } from './src/Wave.js';
-import { HaloObj } from './src/Halo.js';
-import { Common } from './src/Common.js';
-import { StartButton } from './src/StartButton.js';
+import { MomObj } from './src/mom.js';
+import { DataObj } from './src/data.js';
+import { BabyObj } from './src/baby.js';
+import { FruitObj } from './src/fruit.js';
+import { DustObj } from './src/dust.js';
+import { WaveObj } from './src/wave.js';
+import { HaloObj } from './src/halo.js';
+import { Common } from './src/common.js';
+import { StartButton } from './src/startButton.js';
 import { Controller } from './src/Controller.js';
 
 export class Main {

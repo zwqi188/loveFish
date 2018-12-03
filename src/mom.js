@@ -1,4 +1,4 @@
-import { Common } from './Common.js';
+import { Common } from './common.js';
 import { DataStore } from "./DataStore.js";
 
 export class MomObj{

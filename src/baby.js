@@ -1,5 +1,5 @@
 import { DataStore } from "./DataStore.js";
-import { Common } from './Common.js';
+import { Common } from './common.js';
 
 export class BabyObj{
 
