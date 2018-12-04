@@ -22,3 +22,4 @@ new Joystick({
       console.log("left"+distance);
   }
 }
+

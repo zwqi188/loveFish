@@ -53,7 +53,8 @@ export class Main {
     this.dataStore.startButton.init();
     this.dataStore.controller.init();
     this.gameloop();
-    this.registerEvent();
+    //触摸事件
+    //this.registerEvent();
   }
 
   gameloop(){
@@ -87,6 +88,7 @@ export class Main {
   }
 
   registerEvent() {
+    //触摸事件
     wx.onTouchMove(function (e) {
       if (!DataStore.getInstance().data.gameOver) {
         if (e.touches[0].clientX) {
@@ -96,13 +98,9 @@ export class Main {
     }
   });
 
+    //开始按钮的注册事件
     wx.onTouchStart(function (e) {
       if (DataStore.getInstance().data.gameOver) {
-//         console.log("e.touches[0].clientX" + e.touches[0].clientX);
-//         console.log("e.touches[0].clientY" + e.touches[0].clientY);
-//         console.log("X" + (DataStore.getInstance().canvas.width / 2 - DataStore.getInstance().startButton.img.width / 4) + "+" + (DataStore.getInstance().canvas.width / 2 + DataStore.getInstance().startButton.img.width / 2));
-//         console.log("Y" + (DataStore.getInstance().canvas.height / 2 - DataStore.getInstance().startButton.img.height / 4)
-// + "+" + (DataStore.getInstance().canvas.height / 2 + DataStore.getInstance().startButton.img.height / 2));
         if (e.touches[0].clientX > DataStore.getInstance().canvas.width / 2 - DataStore.getInstance().startButton.img.width / 4 && 
           e.touches[0].clientX < DataStore.getInstance().canvas.width / 2 + DataStore.getInstance().startButton.img.width / 2 && 
           e.touches[0].clientY > DataStore.getInstance().canvas.height / 2 - DataStore.getInstance().startButton.img.height / 4 && 
