@@ -12,11 +12,12 @@ export class Controller{
     this.manager = null;
     this.options = {
       mode: 'static',
-      size: 300,
-      color: '#eee',
+      size: 150,
+      color: '#fff',
+      fadeTime:240,
       position: {
         left: '50%',
-        top: '50%'
+        top: '85%'
       },
      // zone: opt && opt.zone
     };
@@ -55,27 +56,7 @@ export class Controller{
     //   }
      
     // } 
-    var me = this;
-    console.log("on" + me);
-    this.manager
-      .on('start', function (evt, data) {
-        me.time = setInterval(() => {
-        me.onStart && me.onStart(me.distance, me.angle);
-        }, 100);
-        console.log('start');
-      })
-      .on('move', function (evt, data) {
-        if (data.direction) {
-          me.angle = data.direction.angle;
-          me.distance = data.distance;
-          console.log('move');
-        }
-      })
-      .on('end', function (evt, data) {
-        clearInterval(me.time);
-        me.onEnd && me.onEnd();
-        console.log('end');
-      });
+   
     
   }
 
@@ -86,9 +67,17 @@ export class Controller{
   }
 
   on() {
-    
-    var me = this;
-    console.log("on" + me);
-   
+      this.manager.on('move', function (evt, data) {
+          console.log('move');
+          console.log(data);
+          if (data.direction) {
+            console.log(data.direction.angle + "," + data.distance);
+          }
+        })
+      // this.manager.on('added', function(evt,nipple){
+      //   nipple.on('move',function(evt){
+      //     console.log(evt);
+      //   })
+      // })
   }
 }

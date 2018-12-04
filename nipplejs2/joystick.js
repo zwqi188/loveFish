@@ -37,21 +37,25 @@ Joystick.prototype.init = function() {
 }
 
 Joystick.prototype._on = function() {
-  var me = this;
+  //var me = this;
   this.manager
     .on('start', function (evt, data) {
-      me.time = setInterval(() => {
-        me.onStart && me.onStart(me.distance,me.angle);
-      }, 100);
+      // me.time = setInterval(() => {
+      //   me.onStart && me.onStart(me.distance,me.angle);
+      // }, 100);
+      console.log("start" + data);
     })
     .on('move', function (evt, data) {
-      if (data.direction) {
-        me.angle = data.direction.angle;
-        me.distance = data.distance;
-      }
-    })
+    //   if (data.direction) {
+    //     me.angle = data.direction.angle;
+    //     me.distance = data.distance;
+    //   }
+    console.log("move" + data);
+     }
+    )
     .on('end', function (evt, data) {
-      clearInterval(me.time);
-      me.onEnd && me.onEnd();
+      // clearInterval(me.time);
+      // me.onEnd && me.onEnd();
+      console.log("end" + data);
     });
 }
