@@ -31,9 +31,9 @@ export class Controller{
     // for (let i = 0; i < 2; i++) {
     //   this.img.push(DataStore.getInstance().res.get("controller" + i));
     // }
-    this.manager = require('../libs/nipplejs.min.js').create(this.options);
+   // this.manager = require('../libs/nipplejs.min.js').create(this.options);
     //this.registerEvent();
-    this.on();
+    //this.on();
 
   }
 

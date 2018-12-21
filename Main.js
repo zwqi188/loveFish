@@ -54,7 +54,7 @@ export class Main {
     this.dataStore.controller.init();
     this.gameloop();
     //触摸事件
-    //this.registerEvent();
+    this.registerEvent();
   }
 
   gameloop(){
@@ -99,17 +99,17 @@ export class Main {
    });
 
     //开始按钮的注册事件
-    // wx.onTouchStart(function (e) {
-    //   if (DataStore.getInstance().data.gameOver) {
-    //     if (e.touches[0].clientX > DataStore.getInstance().canvas.width / 2 - DataStore.getInstance().startButton.img.width / 4 && 
-    //       e.touches[0].clientX < DataStore.getInstance().canvas.width / 2 + DataStore.getInstance().startButton.img.width / 2 && 
-    //       e.touches[0].clientY > DataStore.getInstance().canvas.height / 2 - DataStore.getInstance().startButton.img.height / 4 && 
-    //       e.touches[0].clientY < DataStore.getInstance().canvas.height / 2 + DataStore.getInstance().startButton.img.height / 2){
-    //       DataStore.getInstance().data.gameOver = false;
-    //       DataStore.getInstance().baby.babyBodyCount = 0;
-    //     }
-    //   }
-    // });
+    wx.onTouchStart(function (e) {
+      if (DataStore.getInstance().data.gameOver) {
+        if (e.touches[0].clientX > DataStore.getInstance().canvas.width / 2 - DataStore.getInstance().startButton.img.width / 4 && 
+          e.touches[0].clientX < DataStore.getInstance().canvas.width / 2 + DataStore.getInstance().startButton.img.width / 2 && 
+          e.touches[0].clientY > DataStore.getInstance().canvas.height / 2 - DataStore.getInstance().startButton.img.height / 4 && 
+          e.touches[0].clientY < DataStore.getInstance().canvas.height / 2 + DataStore.getInstance().startButton.img.height / 2){
+          DataStore.getInstance().data.gameOver = false;
+          DataStore.getInstance().baby.babyBodyCount = 0;
+        }
+      }
+    });
   }
 
 }
